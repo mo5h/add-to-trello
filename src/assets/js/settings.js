@@ -35,8 +35,15 @@ var Settings = {
 
   onAuthSuccess: function() {
     $('#auth').addClass('hidden');
-    $('#success').removeClass('hidden');
     $('#settings-form').removeClass('hidden');
+    $('#success')
+      .noty({
+        text: 'You have successfully authorized Add to Trello',
+        layout: 'bottomRight',
+        type: 'information',
+        timeout: 5000
+      });
+
     this.initSettings();
   },
 

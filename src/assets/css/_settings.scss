@@ -1,3 +1,11 @@
+#success {
+  height: 47px;
+}
+
+.pure-control-group {
+  margin-bottom: 15px;
+}
+
 #settings {
   color: #4d4d4d;
 
@@ -31,6 +39,8 @@
   }
 
   .logo-container {
+    padding: 48px 0;
+    margin-bottom: 5px;
     background-color: #edeff0;
     border-bottom: 1px solid #d6dadc;
   }
@@ -51,6 +61,7 @@
   }
 
   .logo {
+    vertical-align: middle;
     width: 350px;
     display: inline;
   }

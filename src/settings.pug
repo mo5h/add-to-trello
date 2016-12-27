@@ -1,0 +1,89 @@
+doctype html
+html
+  head
+    title Add to Trello
+  body#settings
+    .jumbotron.logo-container
+      .centered
+        span.pre-logo Add to
+        |  
+        img.img-responsive.logo(src='assets/images/trello-logo-large.png', alt='Trello Logo')
+    .container
+      .row
+        #auth.auth-loading
+          img.center-block(src='assets/images/ajax-loader.gif', alt='Loading')
+          .text-center.lead Checking authorization
+        #success.hidden
+          .success-body
+            .alert.alert-success  You have successfully authorized Add to Trello
+        #error.hidden
+          h2 Uh oh
+          |  It looks like something went wrong when trying to authorize with Trello. Check your internet connection and try again.
+      #settings-form.hidden.row
+        .sub_header Settings
+        .sub_description  Use these settings to adjust the fields in the popup window.
+        form.settings_form.js-settings-form.clearfix
+          .col-md-5
+            .form-group
+              label(for='title') Card Title
+              |  
+              select.form-control.js-title.js-defined-control(name='title')
+                option(value='empty') Leave Blank
+                option(value='page') Current Page Title
+                option(value='defined') As Defined
+              |  
+              input.value_input.form-control.hidden(type='text', name='titleValue', placeholder='Card Title')
+            .form-group
+              label(for='description') Description
+              |  
+              select.form-control.js-description.js-defined-control(name='description')
+                option(value='empty') Leave Blank
+                option(value='url') Current Page Url
+                option(value='defined') As Defined
+              |  
+              input.value_input.form-control.hidden(type='text', name='descriptionValue', placeholder='Card Description')
+          .col-md-5.col-md-offset-2
+            .form-group
+              label(for='boardList') Board &amp; List Overrides
+              |  
+              select.form-control.js-board-list(name='boardList')
+                option(value='last-used') Last Used
+                option(value='choose') Choose
+            .form-group.board-dropdown.hidden
+              label(for='board') Board
+              |  
+              select.form-control.js-boards(name='board')
+            .form-group.list-dropdown.hidden
+              label(for='list') List
+              |  
+              select.form-control.js-lists(name='list')
+            .form-group.position-dropdown
+              label(for='position') Position
+              |  
+              select.form-control.js-positions(name='position')
+                option(value='bottom') Bottom
+                option(value='top') Top
+          .col-md-12
+            button.btn.green-button(type='submit') Save
+      .row.links
+        .col-md-4
+          h2.lead.text-center Leave a Review
+          .text-center
+            a(href='https://chrome.google.com/webstore/detail/engmocckoohpopiacajolojeobefbcec/?hl=en') Review in the Chrome Webstore
+        .col-md-4
+          h2.lead.text-center Follow on Github
+          .text-center
+            | Submit issues, pull requests, or just follow the development on 
+            a(href='https://github.com/walteranderson/add-to-trello') Github
+            | .
+        .col-md-4
+          h2.lead.text-center Financial Support
+          .paypal.text-center
+            form(action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_top')
+              input(type='hidden', name='cmd', value='_s-xclick')
+              |  
+              input(type='hidden', name='encrypted', value='-----BEGIN PKCS7-----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-----END PKCS7-----')
+              |  
+              input(type='image', src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif', border='0', name='submit', alt='PayPal - The safer, easier way to pay online!')
+              |  
+              img(alt='', border='0', src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif', width='1', height='1')

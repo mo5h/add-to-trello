@@ -22,20 +22,36 @@ var config = {
   module: {
     loaders: [
       {
+        test: /\.pug$/,
+        loader: 'pug'
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')
       },
-      {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml'
+      }
     ]
   },
 
   resolve: {
     extensions: ['', '.js'],
     alias: {
-      'bootstrap': path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets'),
+      bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
     }
   },
 
@@ -44,25 +60,22 @@ var config = {
     // extract css into separate file
     new ExtractTextPlugin('assets/css/bundle.css'),
 
-    // copy the chrome extension manifest
     new CopyWebpackPlugin([
-      { from: './src/manifest.json', to: 'manifest.json' }
-    ]),
-
-    // copy the images
-    new CopyWebpackPlugin([
+      // copy the chrome extension manifest
+      { from: './src/manifest.json', to: 'manifest.json' },
+      // copy the images
       { from: './src/assets/images', to: 'assets/images' }
     ]),
 
     // copy the popup and settings html files
     new HtmlWebpackPlugin({
       filename: 'popup.html',
-      template: './src/popup.html',
+      template: 'src/popup.pug',
     }),
 
     new HtmlWebpackPlugin({
       filename: 'settings.html',
-      template: './src/settings.html',
+      template: 'src/settings.pug',
     })
   ]
 };
