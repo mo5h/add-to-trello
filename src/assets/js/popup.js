@@ -1,3 +1,5 @@
+require('./common');
+
 var $ = require('jquery');
 var TrelloApi = require('./lib/trello-api');
 var dropdownBuilder = require('./lib/dropdown-builder');
@@ -114,4 +116,4 @@ var Popup = {
   }
 };
 
-module.exports = Popup;
+Popup.init();

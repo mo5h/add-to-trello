@@ -1,3 +1,5 @@
+require('./common');
+
 var $ = require('jquery');
 var noty = require('noty');
 var storage = require('./lib/storage');
@@ -150,4 +152,4 @@ var Settings = {
   }
 };
 
-module.exports = Settings;
+Settings.init();

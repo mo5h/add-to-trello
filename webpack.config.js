@@ -9,14 +9,14 @@ var isProd = process.env.NODE_ENV === 'production' ? true : false;
 var config = {
   debug: true,
   devtool: 'cheap-module-source-map',
-  entry: [
-    './src/assets/js/index.js',
-    './src/assets/css/index.scss'
-  ],
+  entry: {
+    popup: './src/assets/js/popup.js',
+    settings: './src/assets/js/settings.js'
+  },
 
   output: {
     path: './build',
-    filename: 'assets/js/bundle.js'
+    filename: 'assets/js/[name].js'
   },
 
   module: {
@@ -69,11 +69,15 @@ var config = {
 
     // copy the popup and settings html files
     new HtmlWebpackPlugin({
+      inject: false,
+      title: 'popup',
       filename: 'popup.html',
       template: 'src/popup.pug',
     }),
 
     new HtmlWebpackPlugin({
+      inject: false,
+      title: 'settings',
       filename: 'settings.html',
       template: 'src/settings.pug',
     })

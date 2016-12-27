@@ -1,7 +1,11 @@
+- var files = htmlWebpackPlugin.files
+- var page = htmlWebpackPlugin.options.title
 doctype html
 html
   head
     title Add to Trello
+    - for (var css in files.css)
+      link(href=files.css[css] rel='stylesheet')
   body#popup
     .container
       .row
@@ -35,3 +39,4 @@ html
           a.js-open-settings.settings-link(href='javascript:void(0)') Settings
           |  
           a.js-logout.logout-link(href='javascript:void(0)') Logout
+    script(src=files.chunks[page].entry)

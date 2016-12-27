@@ -1,7 +1,11 @@
+- var files = htmlWebpackPlugin.files
+- var page = htmlWebpackPlugin.options.title
 doctype html
 html
   head
     title Add to Trello
+    - for (var css in files.css)
+      link(href=files.css[css] rel='stylesheet')
   body#settings
     .jumbotron.logo-container
       .centered
@@ -87,3 +91,4 @@ html
               input(type='image', src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif', border='0', name='submit', alt='PayPal - The safer, easier way to pay online!')
               |  
               img(alt='', border='0', src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif', width='1', height='1')
+    script(src=files.chunks[page].entry)
