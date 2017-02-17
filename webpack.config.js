@@ -87,15 +87,6 @@ var config = {
 if (isProd) {
   config.debug = false;
 
-  // set production NODE_ENV
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
-  );
-
   // minify javascript
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
