@@ -24,6 +24,11 @@ var TrelloApi = (function() {
    * save into localStorage
    */
   var getOrgsAndBoards = function(callback) {
+    var orgs = storage.getOrgs();
+    if (orgs) {
+      callback(null, orgs);
+    }
+
     var orgList = {
       me: { name: 'Boards', boards: [] }
     };
@@ -54,7 +59,7 @@ var TrelloApi = (function() {
         });
 
         storage.setOrgs(orgList);
-        callback();
+        callback(null, orgList);
       });
     });
   };

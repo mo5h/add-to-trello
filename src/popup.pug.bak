@@ -1,0 +1,42 @@
+- var files = htmlWebpackPlugin.files
+- var page = htmlWebpackPlugin.options.title
+doctype html
+html
+  head
+    title Add to Trello
+    - for (var css in files.css)
+      link(href=files.css[css] rel='stylesheet')
+  body#popup
+    .container
+      .row
+        .trello-link
+          img.center-block.trello-logo.js-trello-link(src='assets/images/trello-logo-small.png', alt='Trello Logo')
+        form.add-card-form
+          .form-group
+            label(for='card-title') Card Title
+            |  
+            input.form-control.js-card-title(type='text', name='card-title', autofocus='')
+          .form-group
+            label(for='card-description') Card Description
+            textarea.form-control.js-card-description(name='card-description', rows='5')
+          .form-group
+            label(for='board') Board
+            |  
+            select.form-control.js-boards(name='board')
+          .form-group
+            label(for='list') List
+            |  
+            select.form-control.js-lists(name='list')
+          .form-group
+            label(for='position') Position
+            |  
+            select.form-control.js-positions(name='position')
+              option(value='bottom') Bottom
+              option(value='top') Top
+          .form-group
+            button.btn.green-button.js-submit(type='submit') Add
+        .options-list
+          a.js-open-settings.settings-link(href='javascript:void(0)') Settings
+          |  
+          a.js-logout.logout-link(href='javascript:void(0)') Logout
+    script(src=files.chunks[page].entry)
