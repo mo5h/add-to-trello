@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var storage = require('./storage');
 
 var dropdownBuilder = {

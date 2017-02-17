@@ -1,12 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var isProd = process.env.NODE_ENV === 'production' ? true : false;
-
-var config = {
+module.exports = {
   debug: true,
   devtool: 'cheap-module-source-map',
   entry: {
@@ -21,6 +19,14 @@ var config = {
 
   module: {
     loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015'],
+        }
+      },
       {
         test: /\.pug$/,
         loader: 'pug'
@@ -56,6 +62,10 @@ var config = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
 
     // extract css into separate file
     new ExtractTextPlugin('assets/css/bundle.css'),
@@ -83,17 +93,3 @@ var config = {
     })
   ]
 };
-
-if (isProd) {
-  config.debug = false;
-
-  // minify javascript
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false }
-    })
-  );
-}
-
-module.exports = config;
