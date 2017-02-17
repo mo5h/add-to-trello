@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = {
   debug: true,
@@ -62,6 +63,11 @@ module.exports = {
   },
 
   plugins: [
+    new DotenvPlugin({
+      sample: './.env.example',
+      path: './.env'
+    }),
+
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'

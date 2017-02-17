@@ -1141,6 +1141,16 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dotenv-safe@^2.3.1:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/dotenv-safe/-/dotenv-safe-2.3.3.tgz#f35e09650527579bcc6e3565a7e2b6fcbbd44539"
+  dependencies:
+    dotenv "^2.0.0"
+
+dotenv@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -3457,6 +3467,12 @@ webpack-core@~0.6.9:
   dependencies:
     source-list-map "~0.1.7"
     source-map "~0.4.1"
+
+webpack-dotenv-plugin:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webpack-dotenv-plugin/-/webpack-dotenv-plugin-2.0.0.tgz#f68d0d1c58af252bc97230ba220a707930fd48a8"
+  dependencies:
+    dotenv-safe "^2.3.1"
 
 webpack-sources@^0.1.0:
   version "0.1.3"
