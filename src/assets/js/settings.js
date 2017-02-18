@@ -9,7 +9,9 @@ import {
 } from 'libs/trello-api';
 
 if (!isAuthorized()) {
-  authorize();
+  authorize((err) => {
+    if (err) console.error(err);
+  });
 }
 
 ReactDOM.render(

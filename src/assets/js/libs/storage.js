@@ -1,121 +1,75 @@
+const ORGS_KEY = 'a2t_orgs';
+const SETTINGS_KEY = 'a2t_settings';
+
 /**
- * local storage module for caching trello data
+ * Convenience method for getting a value from localStorage.
+ *
+ * @param  {String} key - localStorage key to search for.
+ * @return {mixed}      - result of JSON parsing contents
  */
-var storage = (function() {
-    'use strict';
+const get = (key) => {
+  const raw = localStorage.getItem(key);
+  return JSON.parse(raw);
+};
 
-    var defaultSettings = {
-        title: 'page',
-        description: 'url',
-        boardList: 'last-used'
-    };
+/**
+ * Convenience method for setting a value in localStorage.
+ *
+ * @param  {String} key - localStorage key to use
+ * @param  {mixed}  val - what you want to save
+ * @return {void}
+ */
+const set = (key, val) => {
+  const json = JSON.stringify(val);
+  localStorage.setItem(key, json);
+};
 
-    /**
-     * clear stored data
-     */
-    var clearData = function() {
-        localStorage.removeItem('trello_orgs');
-        localStorage.removeItem('select_defaults');
-        localStorage.removeItem('settings');
-    };
+export default {
+  /**
+   * Clear all localStorage keys.
+   *
+   * @return {void}
+   */
+  clear() {
+    localStorage.removeItem(ORGS_KEY);
+    localStorage.removeItem(SETTINGS_KEY);
+  },
 
-    /**
-     * reset the default options to be the first board and first list
-     */
-    var resetDefaults = function() {
-        var orgs  = getOrgs();
-        var board = {};
-        var list  = {};
+  /**
+   * Get organizations data.
+   *
+   * @return {Object}
+   */
+  getOrgs() {
+    return get(ORGS_KEY);
+  },
 
-        if (orgs.me.boards.length) {
-            board = orgs.me.boards[0];
+  /**
+   * Set organizations data.
+   *
+   * @param  {Object} data - what to store for organizations
+   * @return {void}
+   */
+  setOrgs(data) {
+    set(ORGS_KEY, data);
+  },
 
-            if (board.lists.length) {
-                list = board.lists[0];
-            } else {
-                list.id = 0;
-            }
-        } else {
-            board.id = 0;
-            list.id  = 0;
-        }
+  /**
+   * Get settings data.
+   *
+   * @return {Object}
+   */
+  getSettings() {
+    return get(SETTINGS_KEY);
+  },
 
-        localStorage.setItem('select_defaults', JSON.stringify({
-            board_id: board.id,
-            list_id: list.id
-        }));
-
-        return getDefaults();
-    };
-
-    /**
-     * set default options
-     */
-    var setDefaults = function(boardId, listId) {
-        localStorage.setItem('select_defaults', JSON.stringify({
-            board_id: boardId,
-            list_id: listId
-        }));
-    };
-
-    /**
-     * retrieve default options
-     */
-    var getDefaults = function() {
-        return JSON.parse(localStorage.getItem('select_defaults'));
-    };
-
-    /**
-     * retrieve organizations and boards and lists
-     */
-    var getOrgs = function() {
-        return JSON.parse(localStorage.getItem('trello_orgs'));
-    };
-
-    /**
-     * set organizations and boards and lists
-     */
-    var setOrgs = function(orgs) {
-        localStorage.setItem('trello_orgs', JSON.stringify(orgs));
-    };
-
-    /**
-     * get settings
-     */
-    var getSettings = function() {
-        var settings = JSON.parse(localStorage.getItem('settings'));
-        if (!settings) {
-            // set and return the default configuration if not set
-            setSettings(defaultSettings);
-            return defaultSettings;
-        }
-
-        return settings;
-    };
-
-    /**
-     * set settings
-     */
-    var setSettings = function(settings) {
-        localStorage.setItem('settings', JSON.stringify(settings));
-    };
-
-    /**
-     * Public API
-     */
-    return {
-        getOrgs: getOrgs,
-        setOrgs: setOrgs,
-
-        getDefaults: getDefaults,
-        setDefaults: setDefaults,
-
-        getSettings: getSettings,
-        setSettings: setSettings,
-
-        resetDefaults: resetDefaults,
-        clearData: clearData
-    }
-}());
-
-module.exports = storage;
+  /**
+   * Set settings data.
+   *
+   * @param  {Object} data - what to store for settings
+   * @return {void}
+   */
+  setSettings(data) {
+    set(SETTINGS_KEY, data);
+  }
+}
