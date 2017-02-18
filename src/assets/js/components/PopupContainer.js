@@ -1,25 +1,45 @@
 import React from 'react';
-import storage from '../lib/storage';
-import TrelloLogo from './TrelloLogo';
-import TrelloApi from '../lib/trello-api';
+import storage from 'libs/storage';
+import {openSettings} from 'libs/chrome';
+import { deauthorize } from 'libs/trello-api';
+
+import {
+  TrelloLogo,
+  AddCardForm
+} from 'components';
 
 export default class PopupContainer extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    const settings = storage.getSettings();
-
-    this.state = {
-      settings
-    };
+  logoutHandler() {
+    deauthorize();
+    openSettings();
   }
 
   render() {
     return (
-      <div className='container'>
+      <div className='Popup container'>
         <div className='row'>
-          <TrelloLogo size='small' className='js-trello-link' />
-          <AddCardForm settings={this.state.settings} />
+          <TrelloLogo size='small' />
+        </div>
+
+        <div className='row'>
+          <div className="col-md-12">
+            <AddCardForm />
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className="col-md-12">
+            <a className="pull-left" href="#" onClick={openSettings}>
+              Settings
+            </a>
+            <a className="pull-right" href="#" onClick={this.logoutHandler}>
+              Logout
+            </a>
+          </div>
         </div>
       </div>
     );

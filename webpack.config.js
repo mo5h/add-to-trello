@@ -58,6 +58,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     alias: {
+      styles: path.resolve(__dirname, 'src', 'assets', 'css'),
+      libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
+      components: path.resolve(__dirname, 'src', 'assets', 'js', 'components'),
       bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
     }
   },
