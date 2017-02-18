@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'styles/index.scss';
-import SettingsContainer from './components/SettingsContainer';
+import SettingsContainer from './containers/SettingsContainer';
 import {
   isAuthorized,
   authorize
