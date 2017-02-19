@@ -31,12 +31,15 @@ export const authorize = (callback) => {
     account: false
   };
 
+  const success = () => callback();
+  const error = (err) => callback(err);
+
   Trello.authorize({
     name,
     expiration,
     scope,
-    () => callback(),
-    (err) => callback(err)
+    success,
+    error
   });
 };
 
