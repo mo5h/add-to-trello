@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const DotenvPlugin = require('webpack-dotenv-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const DotenvPlugin = require('webpack-dotenv-plugin')
 
 module.exports = {
   debug: true,
@@ -25,7 +25,7 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react', 'stage-0'],
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
@@ -92,14 +92,14 @@ module.exports = {
       inject: false,
       title: 'popup',
       filename: 'popup.html',
-      template: 'src/popup.pug',
+      template: 'src/popup.pug'
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       title: 'settings',
       filename: 'settings.html',
-      template: 'src/settings.pug',
+      template: 'src/settings.pug'
     })
   ]
-};
+}

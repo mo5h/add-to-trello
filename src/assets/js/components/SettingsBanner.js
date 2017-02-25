@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import {
   TrelloLogo
-} from 'components';
+} from 'components'
 
 export default () => {
   return (
@@ -11,5 +11,5 @@ export default () => {
         <TrelloLogo size='large' />
       </div>
     </div>
-  );
-};
+  )
+}

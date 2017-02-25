@@ -1,11 +1,10 @@
-import 'libs/vendor/trello-client';
-import storage from 'libs/storage';
+import 'libs/vendor/trello-client'
+import * as storage from 'libs/storage'
 
-const APP_KEY = process.env.TRELLO_APP_KEY;
-const TOKEN = 'trello_token';
+const APP_KEY = process.env.TRELLO_APP_KEY
 
-Trello.setKey(APP_KEY);
-Trello.setToken(localStorage.getItem(TOKEN));
+Trello.setKey(APP_KEY)
+Trello.setToken(storage.get(storage.TRELLO_KEY))
 
 /**
  * Check localStorage if we're authorized.
@@ -13,8 +12,8 @@ Trello.setToken(localStorage.getItem(TOKEN));
  * @return {Boolean}
  */
 export const isAuthorized = () => {
-  return !! localStorage.getItem(TOKEN);
-};
+  return !!storage.get(storage.TRELLO_KEY)
+}
 
 /**
  * Make Trello API call to authorize the user.
@@ -23,16 +22,16 @@ export const isAuthorized = () => {
  * @return {void}
  */
 export const authorize = (callback) => {
-  const name = 'Add to Trello';
-  const expiration = 'never';
+  const name = 'Add to Trello'
+  const expiration = 'never'
   const scope = {
     read: true,
     write: true,
     account: false
-  };
+  }
 
-  const success = () => callback();
-  const error = (err) => callback(err);
+  const success = () => callback()
+  const error = (err) => callback(err)
 
   Trello.authorize({
     name,
@@ -40,8 +39,8 @@ export const authorize = (callback) => {
     scope,
     success,
     error
-  });
-};
+  })
+}
 
 /**
  * Make Trello API call to deauthorize the user.
@@ -50,9 +49,9 @@ export const authorize = (callback) => {
  * @return {void}
  */
 export const deauthorize = () => {
-  Trello.deauthorize();
-  storage.clearData();
-};
+  Trello.deauthorize()
+  storage.clear()
+}
 
 /**
  * Make Trello API call to submit a new card.
@@ -69,7 +68,7 @@ export const submitCard = (data, callback) => {
     pos: data['position'],
     idList: data['list'],
     urlSource: null
-  };
+  }
 
   Trello.rest(
     'POST',
@@ -77,8 +76,8 @@ export const submitCard = (data, callback) => {
     options,
     () => callback(),
     (err) => callback(err)
-  );
-};
+  )
+}
 
 /**
  * Make Trello API call to get organizations, boards, and lists for the user.
@@ -88,53 +87,53 @@ export const submitCard = (data, callback) => {
  * @return {void}
  */
 export const getOrgsAndBoards = (callback) => {
-  const orgs = storage.getOrgs();
+  const orgs = storage.get(storage.ORGS_KEY)
   if (orgs) {
-    return callback(null, orgs);
+    return callback(null, orgs)
   }
 
   const orgList = {
     me: { name: 'Boards', boards: [] }
-  };
+  }
 
   getOrgs((err, orgs) => {
     if (err) {
-      return callback(err);
+      return callback(err)
     }
 
     $.each(orgs, (key, org) => {
       orgList[org.id] = {
         name: org.displayName,
         boards: []
-      };
-    });
+      }
+    })
 
     getBoards((err, boards) => {
       if (err) {
-        return callback(err);
+        return callback(err)
       }
 
       $.each(boards, (key, board) => {
         // add board to either it's organization or the 'me' catchall
-        const organization = orgList[board.idOrganization || 'me'];
+        const organization = orgList[board.idOrganization || 'me']
 
         // make sure the organization we're trying to add
         // the board to exists
         if (organization !== undefined) {
-          organization.boards.push(board);
+          organization.boards.push(board)
         } else {
           // if the organization the board belongs to
           // wasn't added above for whatever reason,
           // add the board to the 'me' catchall
-          orgList['me'].boards.push(board);
+          orgList['me'].boards.push(board)
         }
-      });
+      })
 
-      storage.setOrgs(orgList);
-      callback(null, orgList);
-    });
-  });
-};
+      storage.set(storage.ORGS_KEY, orgList)
+      callback(null, orgList)
+    })
+  })
+}
 
 /**
  * Make Trello API call to get organizations.
@@ -148,8 +147,8 @@ export const getOrgs = (callback) => {
     'members/me/organizations',
     (orgs) => callback(null, orgs),
     (err) => callback(err)
-  );
-};
+  )
+}
 
 /**
  * Make Trello API call to get all open boards with their lists included.
@@ -161,7 +160,7 @@ export const getBoards = (callback) => {
   const options = {
     filter: 'open',
     lists: 'open'
-  };
+  }
 
   Trello.rest(
     'GET',
@@ -169,5 +168,5 @@ export const getBoards = (callback) => {
     options,
     (boards) => callback(null, boards),
     (err) => callback(err)
-  );
-};
+  )
+}

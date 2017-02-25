@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 export default class PopupCardForm extends React.Component {
-  render() {
+  render () {
     return (
       <div>add card form</div>
-    );
+    )
   }
 }

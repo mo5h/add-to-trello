@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import fields from './fields';
+import { combineReducers } from 'redux'
+import fields from './fields'
 
 const rootReducer = combineReducers({
   fields
-});
+})
 
-export default rootReducer;
+export default rootReducer

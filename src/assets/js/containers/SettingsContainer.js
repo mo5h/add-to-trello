@@ -1,17 +1,17 @@
-import React from 'react';
-import {isAuthorized} from 'libs/trello-api';
-import SettingsCardForm from 'containers/SettingsCardForm';
+import React from 'react'
+import {isAuthorized} from 'libs/trello-api'
+import SettingsCardForm from 'containers/SettingsCardForm'
 
 import {
   AuthLoading,
   SettingsBanner,
   LeaveAReview,
   FollowOnGithub
-} from 'components';
+} from 'components'
 
 export default class SettingsContainer extends React.Component {
-  render() {
-    let content;
+  render () {
+    let content
     if (!isAuthorized()) {
       content = <AuthLoading />
     } else {
@@ -41,6 +41,6 @@ export default class SettingsContainer extends React.Component {
 
         </div>
       </div>
-    );
+    )
   }
 }

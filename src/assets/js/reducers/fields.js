@@ -16,12 +16,12 @@ const initialState = [
   },
   {
     id: 'POSITION'
-  },
-];
+  }
+]
 
-export default function fields(state = initialState, action) {
-  switch(action.type) {
+export default function fields (state = initialState, action) {
+  switch (action.type) {
     default:
-      return state;
+      return state
   }
 }

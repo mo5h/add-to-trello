@@ -1,5 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
 import {
   Title,
@@ -9,9 +8,9 @@ import {
   List,
   Position,
   FormList
-} from 'components';
+} from 'components'
 
-console.log(Desc);
+console.log(Desc)
 
 // export default class SettingsCardForm extends React.Component {
 //   render() {
@@ -24,33 +23,33 @@ console.log(Desc);
 // map through the fields and return a list of field components
 const getSettingsFields = (fields) => {
   const newFields = fields.map((field) => {
-    switch(field.id) {
+    switch (field.id) {
       case 'TITLE':
-        return Title;
+        return Title
       case 'DESCRIPTION':
-        return Desc;
+        return Desc
       case 'DUE_DATE':
-        return DueDate;
+        return DueDate
       case 'BOARD':
-        return Board;
+        return Board
       case 'LIST':
-        return List;
+        return List
       case 'POSITION':
-        return Position;
+        return Position
     }
-  });
+  })
 
-  return newFields;
-};
+  return newFields
+}
 
 const mapStateToProps = (state) => {
   return {
     fields: getSettingsFields(state.fields)
-  };
-};
+  }
+}
 
 const SettingsCardForm = connect(
   mapStateToProps,
-)(FormList);
+)(FormList)
 
-export default SettingsCardForm;
+export default SettingsCardForm

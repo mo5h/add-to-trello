@@ -1,5 +1,5 @@
-import React from 'react';
-import {openTrello} from 'libs/chrome';
+import React from 'react'
+import {openTrello} from 'libs/chrome'
 
 /**
  * Trello Logo Component
@@ -9,11 +9,11 @@ import {openTrello} from 'libs/chrome';
  * Popup: img.center-block.trello-logo.js-trello-link(src='assets/images/trello-logo-small.png', alt='Trello Logo')
  */
 export default (props) => {
-  const source = `assets/images/trello-logo-${props.size}.png`;
+  const source = `assets/images/trello-logo-${props.size}.png`
 
-  let classes = 'img img-responsive trello-logo';
+  let classes = 'img img-responsive trello-logo'
   if (props.className) {
-    classes += ' ' + props.className;
+    classes += ' ' + props.className
   }
 
   return (
@@ -21,5 +21,5 @@ export default (props) => {
       className={classes}
       src={source}
       onClick={openTrello} />
-  );
-};
+  )
+}
