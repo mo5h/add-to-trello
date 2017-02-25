@@ -2,10 +2,10 @@ import React from 'react';
 import storage from 'libs/storage';
 import {openSettings} from 'libs/chrome';
 import { deauthorize } from 'libs/trello-api';
+import PopupCardForm from 'containers/PopupCardForm';
 
 import {
   TrelloLogo,
-  AddCardForm
 } from 'components';
 
 export default class PopupContainer extends React.Component {
@@ -27,7 +27,7 @@ export default class PopupContainer extends React.Component {
 
         <div className='row'>
           <div className="col-md-12">
-            <AddCardForm />
+            <PopupCardForm />
           </div>
         </div>
 

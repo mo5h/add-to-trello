@@ -61,6 +61,7 @@ module.exports = {
       styles: path.resolve(__dirname, 'src', 'assets', 'css'),
       libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
       components: path.resolve(__dirname, 'src', 'assets', 'js', 'components'),
+      containers: path.resolve(__dirname, 'src', 'assets', 'js', 'containers'),
       bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
     }
   },

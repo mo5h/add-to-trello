@@ -1,17 +1,13 @@
-import AddCardForm from './AddCardForm';
-import AuthLoading from './AuthLoading';
-import FollowOnGithub from './FollowOnGithub';
-import LeaveAReview from './LeaveAReview';
-import SettingsBanner from './SettingsBanner';
-import SettingsCardForm from './SettingsCardForm';
-import TrelloLogo from './TrelloLogo';
+export { default as AuthLoading } from './AuthLoading';
+export { default as FollowOnGithub } from './FollowOnGithub';
+export { default as LeaveAReview } from './LeaveAReview';
+export { default as SettingsBanner } from './SettingsBanner';
+export { default as TrelloLogo} from './TrelloLogo';
+export { default as FormList } from './FormList';
 
-export {
-  AddCardForm,
-  AuthLoading,
-  FollowOnGithub,
-  LeaveAReview,
-  SettingsBanner,
-  SettingsCardForm,
-  TrelloLogo
-};
+export { default as Title } from './FormFields/Title';
+export { default as Desc } from './FormFields/Description';
+export { default as DueDate } from './FormFields/DueDate';
+export { default as Board } from './FormFields/Board';
+export { default as List } from './FormFields/List';
+export { default as Position } from './FormFields/Position';

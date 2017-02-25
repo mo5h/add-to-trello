@@ -1,10 +1,10 @@
 import React from 'react';
 import {isAuthorized} from 'libs/trello-api';
+import SettingsCardForm from 'containers/SettingsCardForm';
 
 import {
   AuthLoading,
   SettingsBanner,
-  SettingsCardForm,
   LeaveAReview,
   FollowOnGithub
 } from 'components';
