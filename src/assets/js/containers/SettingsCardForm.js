@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import {
   Title,
-  Desc,
+  Description,
   DueDate,
   Board,
   List,
@@ -10,32 +10,22 @@ import {
   FormList
 } from 'components'
 
-console.log(Desc)
-
-// export default class SettingsCardForm extends React.Component {
-//   render() {
-//     return (
-//       <div>settings card form</div>
-//     );
-//   }
-// }
-
 // map through the fields and return a list of field components
 const getSettingsFields = (fields) => {
   const newFields = fields.map((field) => {
     switch (field.id) {
       case 'TITLE':
-        return Title
+        return { ...field, component: Title }
       case 'DESCRIPTION':
-        return Desc
+        return { ...field, component: Description }
       case 'DUE_DATE':
-        return DueDate
+        return { ...field, component: DueDate }
       case 'BOARD':
-        return Board
+        return { ...field, component: Board }
       case 'LIST':
-        return List
+        return { ...field, component: List }
       case 'POSITION':
-        return Position
+        return { ...field, component: Position }
     }
   })
 

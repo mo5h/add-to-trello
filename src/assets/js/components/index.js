@@ -6,7 +6,7 @@ export { default as TrelloLogo } from './TrelloLogo'
 export { default as FormList } from './FormList'
 
 export { default as Title } from './FormFields/Title'
-export { default as Desc } from './FormFields/Description'
+export { default as Description } from './FormFields/Description'
 export { default as DueDate } from './FormFields/DueDate'
 export { default as Board } from './FormFields/Board'
 export { default as List } from './FormFields/List'
