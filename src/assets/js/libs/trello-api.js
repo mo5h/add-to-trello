@@ -4,7 +4,7 @@ import * as storage from 'libs/storage'
 const APP_KEY = process.env.TRELLO_APP_KEY
 
 Trello.setKey(APP_KEY)
-Trello.setToken(storage.get(storage.TRELLO_KEY))
+Trello.setToken(storage.get(storage.TRELLO_KEY, false))
 
 /**
  * Check localStorage if we're authorized.
@@ -12,7 +12,7 @@ Trello.setToken(storage.get(storage.TRELLO_KEY))
  * @return {Boolean}
  */
 export const isAuthorized = () => {
-  return !!storage.get(storage.TRELLO_KEY)
+  return !!storage.get(storage.TRELLO_KEY, false)
 }
 
 /**

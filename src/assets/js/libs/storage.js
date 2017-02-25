@@ -2,7 +2,7 @@ const localStorage = window.localStorage
 
 export const ORGS_KEY = 'a2t_orgs'
 export const SETTINGS_KEY = 'a2t_settings'
-export const TRELLO_KEY = 'a2t_trello_token'
+export const TRELLO_KEY = 'trello_token'
 
 /**
  * get a value from localStorage.
@@ -10,9 +10,14 @@ export const TRELLO_KEY = 'a2t_trello_token'
  * @param  {String} key - localStorage key to search for.
  * @return {mixed}      - result of JSON parsing contents
  */
-export const get = (key) => {
+export const get = (key, toJson = true) => {
   const raw = localStorage.getItem(key)
-  return JSON.parse(raw)
+
+  if (toJson) {
+    return JSON.parse(raw)
+  }
+
+  return raw
 }
 
 /**
