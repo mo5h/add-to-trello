@@ -61,7 +61,7 @@ module.exports = {
       styles: path.resolve(__dirname, 'src', 'assets', 'css'),
       libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
       components: path.resolve(__dirname, 'src', 'assets', 'js', 'components'),
-      containers: path.resolve(__dirname, 'src', 'assets', 'js', 'containers'),
+      actions: path.resolve(__dirname, 'src', 'assets', 'js', 'actions'),
       bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
     }
   },
@@ -75,6 +75,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+
+    new webpack.DefinePlugin({
+      DEVELOPMENT: process.env.NODE_ENV === 'development'
     }),
 
     // extract css into separate file
@@ -92,14 +96,14 @@ module.exports = {
       inject: false,
       title: 'popup',
       filename: 'popup.html',
-      template: 'src/popup.pug'
+      template: 'src/index.pug'
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       title: 'settings',
       filename: 'settings.html',
-      template: 'src/settings.pug'
+      template: 'src/index.pug'
     })
   ]
 }

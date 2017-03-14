@@ -1,15 +1,16 @@
 import React from 'react'
+window.React = React
+
 import { render } from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import 'styles/index.scss'
-import SettingsContainer from './containers/SettingsContainer'
+import SettingsPage from './pages/SettingsPage'
+import configureStore from './store'
 import {
   isAuthorized,
   authorize
 } from 'libs/trello-api'
-import reducer from './reducers'
 
 if (!isAuthorized()) {
   authorize((err) => {
@@ -17,11 +18,11 @@ if (!isAuthorized()) {
   })
 }
 
-const store = createStore(reducer)
+const store = configureStore()
 
 render(
   <Provider store={store}>
-    <SettingsContainer />
+    <SettingsPage />
   </Provider>,
   document.getElementById('root')
 )

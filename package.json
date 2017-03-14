@@ -29,7 +29,8 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-logger": "^2.8.2"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -53,7 +54,13 @@
     "webpack-dotenv-plugin": "^2.0.0"
   },
   "standard": {
-    "globals": ["$", "jQuery", "Trello", "chrome"],
+    "globals": [
+      "$",
+      "jQuery",
+      "Trello",
+      "chrome",
+      "DEVELOPMENT"
+    ],
     "ignore": [
       "src/assets/js/libs/vendor/*.js"
     ],

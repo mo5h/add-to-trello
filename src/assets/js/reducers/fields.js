@@ -1,21 +1,29 @@
+import FieldTypes from 'libs/field-types'
+
 const initialState = [
   {
-    id: 'TITLE'
+    id: FieldTypes.TITLE,
+    display: true
   },
   {
-    id: 'DESCRIPTION'
+    id: FieldTypes.DESCRIPTION,
+    display: true
   },
   {
-    id: 'DUE_DATE'
+    id: FieldTypes.DUE_DATE,
+    display: true
   },
   {
-    id: 'BOARD'
+    id: FieldTypes.BOARD,
+    display: true
   },
   {
-    id: 'LIST'
+    id: FieldTypes.LIST,
+    display: true
   },
   {
-    id: 'POSITION'
+    id: FieldTypes.POSITION,
+    display: true
   }
 ]
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import {isAuthorized} from 'libs/trello-api'
-import SettingsCardForm from 'containers/SettingsCardForm'
 
 import {
   AuthLoading,
@@ -9,13 +8,13 @@ import {
   FollowOnGithub
 } from 'components'
 
-export default class SettingsContainer extends React.Component {
+export default class SettingsPage extends React.Component {
   render () {
     let content
     if (!isAuthorized()) {
       content = <AuthLoading />
     } else {
-      content = <SettingsCardForm />
+      content = <p>placeholder</p>
     }
 
     return (
