@@ -3,7 +3,7 @@ import {
   TrelloLogo
 } from 'components'
 
-export default () => {
+const SettingsBanner = () => {
   return (
     <div className='jumbotron logo-container'>
       <div className='centered'>
@@ -13,3 +13,5 @@ export default () => {
     </div>
   )
 }
+
+export default SettingsBanner

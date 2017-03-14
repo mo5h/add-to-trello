@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {isAuthorized} from 'libs/trello-api'
 
 import {
@@ -8,7 +8,7 @@ import {
   FollowOnGithub
 } from 'components'
 
-export default class SettingsPage extends React.Component {
+export default class SettingsPage extends Component {
   render () {
     let content
     if (!isAuthorized()) {

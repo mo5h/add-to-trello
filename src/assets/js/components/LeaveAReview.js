@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default () => {
+const LeaveAReview = () => {
   return (
     <div className='leave-a-review'>
       <h2 className='text-center lead'>
@@ -14,3 +14,5 @@ export default () => {
     </div>
   )
 }
+
+export default LeaveAReview

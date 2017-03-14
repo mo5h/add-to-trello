@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default () => {
+const AuthLoading = () => {
   return (
     <div className='auth-loading'>
       <div className='text-center'>
@@ -12,3 +12,5 @@ export default () => {
     </div>
   )
 }
+
+export default AuthLoading

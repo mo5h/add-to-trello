@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {openSettings} from 'libs/chrome'
 import { deauthorize } from 'libs/trello-api'
 
@@ -6,7 +6,7 @@ import {
   TrelloLogo
 } from 'components'
 
-export default class PopupPage extends React.Component {
+export default class PopupPage extends Component {
 
   logoutHandler () {
     deauthorize()
