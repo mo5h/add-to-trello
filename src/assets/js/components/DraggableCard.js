@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
-// import FieldTypes from 'libs/field-types'
 import { flow } from 'lodash'
+import ToggleSwitch from '@trendmicro/react-toggle-switch'
 
 const CARD = 'card'
 
@@ -32,17 +32,23 @@ const cardTarget = {
 }
 
 const styles = {
-  backgroundColor: '#edeff0',
-  borderBottom: '1px solid #ccc',
-  marginBottom: '5px',
-  padding: '8px',
-  borderRadius: '3px',
-  cursor: 'move'
+  container: {
+    backgroundColor: '#edeff0',
+    borderBottom: '1px solid #ccc',
+    marginBottom: '5px',
+    padding: '8px',
+    borderRadius: '3px',
+    cursor: 'move'
+  },
+  switch: {
+    float: 'right'
+  }
 }
 
 const DraggableCard = (props) => {
   const {
     field,
+    toggleCard,
     isDragging,
     connectDragSource,
     connectDropTarget
@@ -50,8 +56,16 @@ const DraggableCard = (props) => {
   const opacity = isDragging ? 0 : 1
 
   return connectDragSource(connectDropTarget(
-    <div style={{...styles, opacity}}>
+    <div style={{...styles.container, opacity}}>
       <label>{field.label}</label>
+
+      <div style={styles.switch}>
+        <ToggleSwitch
+          size='sm'
+          checked={field.display}
+          onChange={(e) => toggleCard(field.id, !field.display)}
+        />
+      </div>
     </div>
   ))
 }

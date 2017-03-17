@@ -1,7 +1,8 @@
 import update from 'react/lib/update'
 import FieldTypes from 'libs/field-types'
 import {
-  MOVE_FIELD
+  MOVE_FIELD,
+  TOGGLE_FIELD
 } from 'actions'
 
 const initialState = [
@@ -21,13 +22,8 @@ const initialState = [
     display: true
   },
   {
-    id: FieldTypes.BOARD,
-    label: 'Board',
-    display: true
-  },
-  {
-    id: FieldTypes.LIST,
-    label: 'List',
+    id: FieldTypes.BOARD_LIST,
+    label: 'Board and List',
     display: true
   },
   {
@@ -40,12 +36,22 @@ const initialState = [
 export default function fields (state = initialState, action) {
   switch (action.type) {
     case MOVE_FIELD:
-      const dragCard = state[action.dragIndex]
+      const dragField = state[action.dragIndex]
       return update(state, {
         $splice: [
           [action.dragIndex, 1],
-          [action.hoverIndex, 0, dragCard]
+          [action.hoverIndex, 0, dragField]
         ]
+      })
+    case TOGGLE_FIELD:
+      return update(state, {
+        $apply: fields => fields.map((field, i) => {
+          if (field.id !== action.id) return field
+          return {
+            ...field,
+            display: action.display
+          }
+        })
       })
     default:
       return state

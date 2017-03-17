@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import {
@@ -13,7 +13,13 @@ const styles = {
 /**
  * Renders a reorderable list of fields to configure.
  */
-const DraggableContainer = ({ fields, onReorder }) => {
+const DraggableContainer = (props) => {
+  const {
+    fields,
+    onReorder,
+    onToggle
+  } = props
+
   return (
     <div style={styles}>
       {fields.map((field, i) => {
@@ -23,10 +29,17 @@ const DraggableContainer = ({ fields, onReorder }) => {
           id={field.id}
           field={field}
           moveCard={onReorder}
+          toggleCard={onToggle}
         />
       })}
     </div>
   )
+}
+
+DraggableContainer.propTypes = {
+  fields: PropTypes.array.isRequired,
+  onReorder: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired
 }
 
 export default DragDropContext(HTML5Backend)(DraggableContainer)

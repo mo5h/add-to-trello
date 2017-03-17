@@ -62,7 +62,8 @@ module.exports = {
       libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
       components: path.resolve(__dirname, 'src', 'assets', 'js', 'components'),
       actions: path.resolve(__dirname, 'src', 'assets', 'js', 'actions'),
-      bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
+      bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets'),
+      toggle: path.resolve(__dirname, 'node_modules', '@trendmicro', 'react-toggle-switch', 'dist', 'react-toggle-switch.css')
     }
   },
 

@@ -2,7 +2,6 @@ export default {
   TITLE: 'title',
   DESCRIPTION: 'description',
   DUE_DATE: 'due-date',
-  BOARD: 'board',
-  LIST: 'list',
+  BOARD_LIST: 'board-list',
   POSITION: 'position'
 }
