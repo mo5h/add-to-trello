@@ -44,7 +44,6 @@ class SettingsPage extends Component {
 
     return (
       <div className='Settings'>
-
         <SettingsBanner />
 
         <div className='container'>

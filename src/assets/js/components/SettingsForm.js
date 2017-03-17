@@ -1,6 +1,14 @@
 import React, { PropTypes } from 'react'
 import { DraggableContainer } from 'components'
 
+const styles = {
+  heading: {
+    fontSize: '20px',
+    paddingBottom: '10px',
+    borderBottom: '1px solid #D6DADC'
+  }
+}
+
 /**
  * Renders a reorderable list of fields to configure.
  */
@@ -12,8 +20,9 @@ const SettingsForm = (props) => {
   } = props
 
   return (
-    <div className='t-settings-form clearfix'>
-      <div className='col-md-6'>
+    <div className='clearfix'>
+      <div className='col-md-7 col-md-offset-3'>
+        <h3 style={styles.heading}>Popup Settings</h3>
         <DraggableContainer
           fields={fields}
           onReorder={onReorder}
