@@ -4,8 +4,12 @@ import { DraggableContainer } from 'components'
 const styles = {
   heading: {
     fontSize: '20px',
-    paddingBottom: '10px',
+    padding: '10px',
     borderBottom: '1px solid #D6DADC'
+  },
+  saveButton: {
+    float: 'right',
+    marginTop: '20px'
   }
 }
 
@@ -16,12 +20,14 @@ const SettingsForm = (props) => {
   const {
     fields,
     onReorder,
-    onToggle
+    onToggle,
+    onSave
   } = props
 
   return (
     <div className='clearfix'>
       <div className='col-md-7 col-md-offset-3'>
+        <button onClick={onSave} className='btn green-button' style={styles.saveButton}>Save</button>
         <h3 style={styles.heading}>Popup Settings</h3>
         <DraggableContainer
           fields={fields}
@@ -36,7 +42,8 @@ const SettingsForm = (props) => {
 SettingsForm.propTypes = {
   fields: PropTypes.array.isRequired,
   onReorder: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired
+  onToggle: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
 }
 
 export default SettingsForm

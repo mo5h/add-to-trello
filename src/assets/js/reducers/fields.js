@@ -1,39 +1,14 @@
 import update from 'react/lib/update'
-import FieldTypes from 'libs/field-types'
+import initialState from 'libs/initial-state'
+import * as storage from 'libs/storage'
 import {
   MOVE_FIELD,
   TOGGLE_FIELD
 } from 'actions'
 
-const initialState = [
-  {
-    id: FieldTypes.TITLE,
-    label: 'Title',
-    display: true
-  },
-  {
-    id: FieldTypes.DESCRIPTION,
-    label: 'Description',
-    display: true
-  },
-  {
-    id: FieldTypes.DUE_DATE,
-    label: 'Due Date',
-    display: true
-  },
-  {
-    id: FieldTypes.BOARD_LIST,
-    label: 'Board and List',
-    display: true
-  },
-  {
-    id: FieldTypes.POSITION,
-    label: 'Position',
-    display: true
-  }
-]
+const preloadedState = storage.get(storage.SETTINGS_KEY) || initialState.fields
 
-export default function fields (state = initialState, action) {
+export default function fields (state = preloadedState, action) {
   switch (action.type) {
     case MOVE_FIELD:
       const dragField = state[action.dragIndex]
