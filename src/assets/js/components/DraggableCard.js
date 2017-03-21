@@ -68,7 +68,7 @@ const DraggableCard = (props) => {
         <ToggleSwitch
           size='sm'
           checked={field.display}
-          onChange={(e) => toggleCard(field.id, !field.display)}
+          onChange={() => toggleCard(field.id, !field.display)}
         />
       </div>
 

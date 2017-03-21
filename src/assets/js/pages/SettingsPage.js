@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import noty from 'noty'
 import { isAuthorized } from 'libs/trello-api'
 import {
-  saveFields
+  moveField,
+  saveFields,
+  toggleField,
+  updatePrefill
 } from 'actions'
 
 import {
@@ -11,13 +14,16 @@ import {
   SettingsBanner,
   LeaveAReview,
   FollowOnGithub,
-  SettingsForm
+  DraggableContainer
 } from 'components'
 
 class SettingsPage extends Component {
   constructor (props) {
     super(props)
     this.onSave = this.onSave.bind(this)
+    this.onReorder = this.onReorder.bind(this)
+    this.onToggle = this.onToggle.bind(this)
+    this.updatePrefill = this.updatePrefill.bind(this)
   }
 
   onSave () {
@@ -37,16 +43,28 @@ class SettingsPage extends Component {
     })
   }
 
-  renderSettingsForm () {
+  onReorder (dragIndex, hoverIndex) {
     const {
-      fields
+      dispatch
     } = this.props
 
-    if (!isAuthorized()) {
-      return <AuthLoading />
-    }
+    dispatch(moveField(dragIndex, hoverIndex))
+  }
 
-    return <SettingsForm fields={fields} onSave={this.onSave} />
+  onToggle (id, display) {
+    const {
+      dispatch
+    } = this.props
+
+    dispatch(toggleField(id, display))
+  }
+
+  updatePrefill (fieldId, prefill) {
+    const {
+      dispatch
+    } = this.props
+
+    dispatch(updatePrefill(fieldId, prefill))
   }
 
   render () {
@@ -56,7 +74,11 @@ class SettingsPage extends Component {
 
         <div className='container'>
           <div className='row'>
-            {this.renderSettingsForm()}
+            {
+              isAuthorized()
+                ? this.renderSettingsForm()
+                : <AuthLoading />
+            }
           </div>
 
           <div className='row footer'>
@@ -68,6 +90,39 @@ class SettingsPage extends Component {
             </div>
           </div>
 
+        </div>
+      </div>
+    )
+  }
+
+  renderSettingsForm () {
+    const {
+      fields
+    } = this.props
+
+    const styles = {
+      heading: {
+        fontSize: '20px',
+        padding: '10px',
+        borderBottom: '1px solid #D6DADC'
+      },
+      saveButton: {
+        float: 'right',
+        marginTop: '20px'
+      }
+    }
+
+    return (
+      <div className='clearfix'>
+        <div className='col-md-7 col-md-offset-3'>
+          <button onClick={this.onSave} className='btn green-button' style={styles.saveButton}>Save</button>
+          <h3 style={styles.heading}>Popup Settings</h3>
+          <DraggableContainer
+            fields={fields}
+            onReorder={this.onReorder}
+            onToggle={this.onToggle}
+            updatePrefill={this.updatePrefill}
+          />
         </div>
       </div>
     )
