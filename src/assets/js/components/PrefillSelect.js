@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PrefillTypes from 'libs/prefill-types'
 
 export default class PrefillSelect extends Component {
   constructor (props) {
@@ -14,11 +15,11 @@ export default class PrefillSelect extends Component {
     } = this.props
 
     const selected = options.available.find((o) => o.id === this.refs.select.value)
-    // const value = this.refs.value || null
+    const value = this.refs.value ? this.refs.value.value : null
     const prefill = {
       ...options,
-      selected
-      // value
+      selected,
+      value
     }
 
     onChange(prefill)
@@ -29,31 +30,60 @@ export default class PrefillSelect extends Component {
       options
     } = this.props
 
+    let subOption
+    switch (options.selected.id) {
+      case PrefillTypes.USER_DEFINED.id:
+        subOption = this.renderInput(options.value)
+        break
+      case PrefillTypes.BOARD_LIST_CHOOSE.id:
+        subOption = this.renderChooser()
+    }
+
     return (
       <div>
         <label>Default Value:</label>
-        <select
-          ref='select'
-          className='form-control'
-          value={options.selected.id}
-          onChange={this.onChange}>
-          {
-            options.available.map((type, i) => {
-              return (
-                <option key={i} value={type.id}>
-                  {type.label}
-                </option>
-              )
-            })
-          }
-        </select>
+
+        <div className='form-group'>
+          <select
+            ref='select'
+            className='form-control'
+            value={options.selected.id}
+            onChange={this.onChange}>
+            {
+              options.available.map((type, i) => {
+                return (
+                  <option key={i} value={type.id}>
+                    {type.label}
+                  </option>
+                )
+              })
+            }
+          </select>
+        </div>
+
+        <div className='form-group'>
+          {subOption}
+        </div>
+
       </div>
     )
   }
 
   renderInput (value) {
     return (
-      <input ref='value' value={value} onChange={this.onChange} />
+      <input
+        ref='value'
+        className='form-control'
+        defaultValue={value}
+        placeholder='Type something...'
+        onChange={this.onChange}
+      />
+    )
+  }
+
+  renderChooser () {
+    return (
+      <p>placeholder</p>
     )
   }
 }

@@ -10,9 +10,6 @@ const styles = {
   padding: '10px'
 }
 
-/**
- * Renders a reorderable list of fields to configure.
- */
 const DraggableContainer = (props) => {
   const {
     fields,

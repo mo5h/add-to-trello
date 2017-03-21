@@ -33,6 +33,7 @@ export default function fields (state = preloadedState, action) {
       return update(state, {
         $apply: fields => fields.map((field, i) => {
           if (field.id !== action.id) return field
+          // TODO: clear out `value` when it's not being used
           return {
             ...field,
             prefill: action.prefill
