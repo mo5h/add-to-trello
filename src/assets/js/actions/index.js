@@ -3,6 +3,7 @@ import * as storage from 'libs/storage'
 export const MOVE_FIELD = 'MOVE_FIELD'
 export const TOGGLE_FIELD = 'TOGGLE_FIELD'
 export const SAVE_FIELDS = 'SAVE_FIELDS'
+export const UPDATE_PREFILL = 'UPDATE_PREFILL'
 
 export const moveField = (dragIndex, hoverIndex) => {
   return {
@@ -24,5 +25,13 @@ export const saveFields = (fields) => {
   storage.set(storage.SETTINGS_KEY, fields)
   return {
     type: SAVE_FIELDS
+  }
+}
+
+export const updatePrefill = (fieldId, updatedPrefill) => {
+  return {
+    type: UPDATE_PREFILL,
+    id: fieldId,
+    prefill: updatedPrefill
   }
 }

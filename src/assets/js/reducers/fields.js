@@ -3,7 +3,8 @@ import initialState from 'libs/initial-state'
 import * as storage from 'libs/storage'
 import {
   MOVE_FIELD,
-  TOGGLE_FIELD
+  TOGGLE_FIELD,
+  UPDATE_PREFILL
 } from 'actions'
 
 const preloadedState = storage.get(storage.SETTINGS_KEY) || initialState.fields
@@ -25,6 +26,16 @@ export default function fields (state = preloadedState, action) {
           return {
             ...field,
             display: action.display
+          }
+        })
+      })
+    case UPDATE_PREFILL:
+      return update(state, {
+        $apply: fields => fields.map((field, i) => {
+          if (field.id !== action.id) return field
+          return {
+            ...field,
+            prefill: action.prefill
           }
         })
       })

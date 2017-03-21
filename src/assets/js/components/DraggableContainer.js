@@ -17,20 +17,24 @@ const DraggableContainer = (props) => {
   const {
     fields,
     onReorder,
-    onToggle
+    onToggle,
+    updatePrefill
   } = props
 
   return (
     <div style={styles}>
       {fields.map((field, i) => {
-        return <DraggableCard
-          key={field.id}
-          index={i}
-          id={field.id}
-          field={field}
-          moveCard={onReorder}
-          toggleCard={onToggle}
-        />
+        return (
+          <DraggableCard
+            key={field.id}
+            index={i}
+            id={field.id}
+            field={field}
+            moveCard={onReorder}
+            toggleCard={onToggle}
+            updatePrefill={updatePrefill}
+          />
+        )
       })}
     </div>
   )

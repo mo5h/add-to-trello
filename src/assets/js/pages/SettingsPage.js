@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import noty from 'noty'
 import { isAuthorized } from 'libs/trello-api'
 import {
-  moveField,
-  toggleField,
   saveFields
 } from 'actions'
 
@@ -19,25 +17,7 @@ import {
 class SettingsPage extends Component {
   constructor (props) {
     super(props)
-    this.onReorder = this.onReorder.bind(this)
-    this.onToggle = this.onToggle.bind(this)
     this.onSave = this.onSave.bind(this)
-  }
-
-  onReorder (dragIndex, hoverIndex) {
-    const {
-      dispatch
-    } = this.props
-
-    dispatch(moveField(dragIndex, hoverIndex))
-  }
-
-  onToggle (id, display) {
-    const {
-      dispatch
-    } = this.props
-
-    dispatch(toggleField(id, display))
   }
 
   onSave () {
@@ -66,12 +46,7 @@ class SettingsPage extends Component {
       return <AuthLoading />
     }
 
-    return <SettingsForm
-      fields={fields}
-      onReorder={this.onReorder}
-      onToggle={this.onToggle}
-      onSave={this.onSave}
-    />
+    return <SettingsForm fields={fields} onSave={this.onSave} />
   }
 
   render () {

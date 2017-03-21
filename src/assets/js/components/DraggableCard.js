@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 import { flow } from 'lodash'
 import ToggleSwitch from '@trendmicro/react-toggle-switch'
+import { PrefillSelect } from 'components'
 
 const CARD = 'card'
 
@@ -42,6 +43,9 @@ const styles = {
   },
   switch: {
     float: 'right'
+  },
+  select: {
+    margin: '10px 0'
   }
 }
 
@@ -50,6 +54,7 @@ const DraggableCard = (props) => {
     field,
     toggleCard,
     isDragging,
+    updatePrefill,
     connectDragSource,
     connectDropTarget
   } = props
@@ -66,6 +71,14 @@ const DraggableCard = (props) => {
           onChange={(e) => toggleCard(field.id, !field.display)}
         />
       </div>
+
+      <div style={styles.select}>
+        <PrefillSelect
+          options={field.prefill}
+          onChange={(prefill) => updatePrefill(field.id, prefill)}
+        />
+      </div>
+
     </div>
   ))
 }
