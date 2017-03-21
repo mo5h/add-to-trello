@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PrefillTypes from 'libs/prefill-types'
+import {
+  BoardListChooser
+} from 'components'
 
 export default class PrefillSelect extends Component {
   constructor (props) {
     super(props)
-
     this.onChange = this.onChange.bind(this)
   }
 
@@ -36,7 +38,7 @@ export default class PrefillSelect extends Component {
         subOption = this.renderInput(options.value)
         break
       case PrefillTypes.BOARD_LIST_CHOOSE.id:
-        subOption = this.renderChooser()
+        subOption = <BoardListChooser prefillValue={options.value} />
     }
 
     return (
@@ -78,12 +80,6 @@ export default class PrefillSelect extends Component {
         placeholder='Type something...'
         onChange={this.onChange}
       />
-    )
-  }
-
-  renderChooser () {
-    return (
-      <p>placeholder</p>
     )
   }
 }
