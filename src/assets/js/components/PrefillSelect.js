@@ -32,13 +32,13 @@ export default class PrefillSelect extends Component {
       options
     } = this.props
 
-    let subOption
-    switch (options.selected.id) {
-      case PrefillTypes.USER_DEFINED.id:
-        subOption = this.renderInput(options.value)
-        break
-      case PrefillTypes.BOARD_LIST_CHOOSE.id:
-        subOption = <BoardListChooser prefillValue={options.value} />
+    let subOption = this.getSubOption()
+    if (subOption) {
+      subOption = (
+        <div className='form-group'>
+          {subOption}
+        </div>
+      )
     }
 
     return (
@@ -63,23 +63,34 @@ export default class PrefillSelect extends Component {
           </select>
         </div>
 
-        <div className='form-group'>
-          {subOption}
-        </div>
+        {subOption}
 
       </div>
     )
   }
 
-  renderInput (value) {
-    return (
-      <input
-        ref='value'
-        className='form-control'
-        defaultValue={value}
-        placeholder='Type something...'
-        onChange={this.onChange}
-      />
-    )
+  getSubOption () {
+    const {
+      options
+    } = this.props
+
+    switch (options.selected.id) {
+      case PrefillTypes.USER_DEFINED.id:
+        return (
+          <input
+            ref='value'
+            className='form-control'
+            defaultValue={options.value}
+            placeholder='Type something...'
+            onChange={this.onChange}
+          />
+        )
+      case PrefillTypes.BOARD_LIST_CHOOSE.id:
+        return (
+          <BoardListChooser prefillValue={options.value} />
+        )
+      default:
+        return null
+    }
   }
 }
