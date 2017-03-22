@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import noty from 'noty'
-import { isAuthorized } from 'libs/trello-api'
+import TrelloApi from 'libs/trello-api'
 import {
   moveField,
   saveFields,
@@ -75,7 +75,7 @@ class SettingsPage extends Component {
         <div className='container'>
           <div className='row'>
             {
-              isAuthorized()
+              TrelloApi.isAuthorized()
                 ? this.renderSettingsForm()
                 : <AuthLoading />
             }

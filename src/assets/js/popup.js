@@ -4,11 +4,11 @@ import { Provider } from 'react-redux'
 
 import 'styles/index.scss'
 import PopupPage from './pages/PopupPage'
-import { isAuthorized } from 'libs/trello-api'
+import TrelloApi from 'libs/trello-api'
 import { openSettings } from 'libs/chrome'
 import configureStore from './store'
 
-if (!isAuthorized()) {
+if (!TrelloApi.isAuthorized()) {
   openSettings()
 }
 

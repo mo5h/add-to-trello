@@ -2,6 +2,15 @@ import FieldTypes from 'libs/field-types'
 import PrefillTypes from 'libs/prefill-types'
 
 const initialState = {
+  trello: {
+    receivedAt: null,
+    organizations: {
+      me: {
+        displayName: 'Boards',
+        boards: []
+      }
+    }
+  },
   fields: [
     {
       id: FieldTypes.TITLE,

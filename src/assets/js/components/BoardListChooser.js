@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  fetchAllOrgs
+} from 'actions'
 
 class BoardListChooser extends Component {
+  componentDidMount () {
+    this.props.dispatch(fetchAllOrgs())
+  }
+
   render () {
     let {
       boards
@@ -32,4 +40,4 @@ class BoardListChooser extends Component {
   }
 }
 
-export default BoardListChooser
+export default connect()(BoardListChooser)
