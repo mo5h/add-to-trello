@@ -10,14 +10,13 @@ export default class PrefillSelect extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange () {
+  onChange (value) {
     const {
       options,
       onChange
     } = this.props
 
     const selected = options.available.find((o) => o.id === this.refs.select.value)
-    const value = this.refs.value ? this.refs.value.value : null
     const prefill = {
       ...options,
       selected,
@@ -32,15 +31,6 @@ export default class PrefillSelect extends Component {
       options
     } = this.props
 
-    let subOption = this.getSubOption()
-    if (subOption) {
-      subOption = (
-        <div className='form-group'>
-          {subOption}
-        </div>
-      )
-    }
-
     return (
       <div>
         <label>Default Value:</label>
@@ -50,7 +40,7 @@ export default class PrefillSelect extends Component {
             ref='select'
             className='form-control'
             value={options.selected.id}
-            onChange={this.onChange}>
+            onChange={() => this.onChange()}>
             {
               options.available.map((type, i) => {
                 return (
@@ -63,7 +53,7 @@ export default class PrefillSelect extends Component {
           </select>
         </div>
 
-        {subOption}
+        {this.getSubOption()}
 
       </div>
     )
@@ -78,16 +68,15 @@ export default class PrefillSelect extends Component {
       case PrefillTypes.USER_DEFINED.id:
         return (
           <input
-            ref='value'
             className='form-control'
             defaultValue={options.value}
             placeholder='Type something...'
-            onChange={this.onChange}
+            onChange={(e) => this.onChange(e.target.value)}
           />
         )
       case PrefillTypes.BOARD_LIST_CHOOSE.id:
         return (
-          <BoardListChooser prefillValue={options.value} />
+          <BoardListChooser prefillValue={options.value} onChange={this.onChange} />
         )
       default:
         return null

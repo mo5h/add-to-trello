@@ -36,7 +36,7 @@ const styles = {
   container: {
     backgroundColor: '#edeff0',
     borderBottom: '1px solid #ccc',
-    marginBottom: '5px',
+    marginBottom: '8px',
     padding: '8px',
     borderRadius: '3px',
     cursor: 'move'

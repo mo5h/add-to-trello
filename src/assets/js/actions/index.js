@@ -19,11 +19,12 @@ export const toggleField = (id, display) => {
   }
 }
 
-export const SAVE_FIELDS = 'SAVE_FIELDS'
-export const saveFields = (fields) => {
+export const SAVE = 'SAVE'
+export const save = (fields, trello) => {
   storage.set(storage.SETTINGS_KEY, fields)
+  storage.set(storage.ORGS_KEY, trello)
   return {
-    type: SAVE_FIELDS
+    type: SAVE
   }
 }
 
@@ -67,18 +68,20 @@ export const fetchAllOrgs = () => {
         } = member
 
         return boards.reduce((state, board) => {
+          const orgId = board.idOrganization
+
           // first check if the org has already been added and push into that
-          if (state[board.idOrganization]) {
-            state[board.idOrganization].boards.push(board)
+          if (state[orgId]) {
+            state[orgId].boards.push(board)
             return state
           }
 
           // if not, check if it's in our orgs list and add the new org to the accumulator
-          const selectedOrg = organizations.find((org) => org.id === board.idOrganization)
+          const selectedOrg = organizations.find((org) => org.id === orgId)
           if (selectedOrg) {
             state[selectedOrg.id] = {
               displayName: selectedOrg.displayName,
-              boards
+              boards: [board]
             }
             return state
           }
