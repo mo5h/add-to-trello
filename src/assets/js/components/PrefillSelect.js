@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import PrefillTypes from 'libs/prefill-types'
 import {
   BoardListChooser
 } from 'components'
 
-export default class PrefillSelect extends Component {
+class PrefillSelect extends Component {
   constructor (props) {
     super(props)
     this.onChange = this.onChange.bind(this)
@@ -83,3 +83,10 @@ export default class PrefillSelect extends Component {
     }
   }
 }
+
+PrefillSelect.propTypes = {
+  options: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired
+}
+
+export default PrefillSelect

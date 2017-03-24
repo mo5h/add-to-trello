@@ -90,7 +90,9 @@ DraggableCard.propTypes = {
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.any.isRequired,
   field: PropTypes.object.isRequired,
-  moveCard: PropTypes.func.isRequired
+  moveCard: PropTypes.func.isRequired,
+  toggleCard: PropTypes.func.isRequired,
+  updatePrefill: PropTypes.func.isRequired
 }
 
 export default flow(

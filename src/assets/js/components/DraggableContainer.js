@@ -40,7 +40,8 @@ const DraggableContainer = (props) => {
 DraggableContainer.propTypes = {
   fields: PropTypes.array.isRequired,
   onReorder: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired
+  onToggle: PropTypes.func.isRequired,
+  updatePrefill: PropTypes.func.isRequired
 }
 
 export default DragDropContext(HTML5Backend)(DraggableContainer)

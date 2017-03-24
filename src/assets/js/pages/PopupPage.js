@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import {openSettings} from 'libs/chrome'
+import { connect } from 'react-redux'
+import { openSettings } from 'libs/chrome'
 import TrelloApi from 'libs/trello-api'
 
 import {
-  TrelloLogo
+  TrelloLogo,
+  PopupForm
 } from 'components'
 
-export default class PopupPage extends Component {
+class PopupPage extends Component {
 
   logoutHandler () {
     TrelloApi.deauthorize()
@@ -14,6 +16,8 @@ export default class PopupPage extends Component {
   }
 
   render () {
+    const { fields } = this.props
+
     return (
       <div className='Popup container'>
         <div className='row'>
@@ -22,7 +26,7 @@ export default class PopupPage extends Component {
 
         <div className='row'>
           <div className='col-md-12'>
-            <p>placeholder</p>
+            <PopupForm fields={fields} />
           </div>
         </div>
 
@@ -40,3 +44,13 @@ export default class PopupPage extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  const { fields } = state
+
+  return {
+    fields
+  }
+}
+
+export default connect(mapStateToProps)(PopupPage)

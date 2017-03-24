@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import {
@@ -124,6 +124,11 @@ class BoardListChooser extends Component {
       </div>
     )
   }
+}
+
+BoardListChooser.propTypes = {
+  prefillValue: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
