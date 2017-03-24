@@ -26,6 +26,8 @@ class BoardListChooser extends Component {
   }
 
   componentDidMount () {
+    // TODO: eventually use `receivedAt` as a way to cache results
+    // instead of fetching every time the component loads
     this.props.dispatch(fetchAllOrgs())
   }
 
