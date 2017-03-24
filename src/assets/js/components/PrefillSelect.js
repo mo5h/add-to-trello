@@ -10,7 +10,7 @@ export default class PrefillSelect extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange (value) {
+  onChange (value = null) {
     const {
       options,
       onChange

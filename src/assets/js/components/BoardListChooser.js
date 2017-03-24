@@ -32,6 +32,7 @@ class BoardListChooser extends Component {
   boardChanged () {
     const boardId = this.refs.board.value
 
+    // since the board changed, we need to invalidate whatever was set as the list
     this.refs.list.value = null
 
     this.setState({ boardId })
