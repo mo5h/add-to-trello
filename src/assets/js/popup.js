@@ -3,10 +3,11 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 
 import 'styles/index.scss'
-import PopupPage from './pages/PopupPage'
-import TrelloApi from 'libs/trello-api'
-import { openSettings } from 'libs/chrome'
 import configureStore from './store'
+import TrelloApi from 'libs/trello-api'
+
+import PopupPage from './pages/PopupPage'
+import { openSettings } from 'libs/chrome'
 
 if (!TrelloApi.isAuthorized()) {
   openSettings()
