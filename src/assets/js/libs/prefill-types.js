@@ -34,5 +34,9 @@ export default {
   CURRENT_DATE: {
     id: 'current-date',
     label: 'Current Date'
+  },
+  CHOOSE_DATE: {
+    id: 'choose-date',
+    label: 'Choose a Date'
   }
 }

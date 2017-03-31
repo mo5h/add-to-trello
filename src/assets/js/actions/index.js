@@ -19,12 +19,21 @@ export const toggleField = (id, display) => {
   }
 }
 
-export const SAVE = 'SAVE'
-export const save = (fields, trello) => {
+export const SAVE_FIELDS = 'SAVE_FIELDS'
+export const saveFields = (fields) => {
   storage.set(storage.SETTINGS_KEY, fields)
+  return {
+    type: SAVE_FIELDS,
+    fields
+  }
+}
+
+export const SAVE_TRELLO = 'SAVE_TRELLO'
+export const saveTrello = (trello) => {
   storage.set(storage.ORGS_KEY, trello)
   return {
-    type: SAVE
+    type: SAVE_TRELLO,
+    trello
   }
 }
 
@@ -105,6 +114,39 @@ export const fetchAllOrgs = () => {
        */
       .then((state) => {
         dispatch(receiveOrgs(state))
+      })
+  }
+}
+
+export const REQUEST_SUBMIT = 'REQUEST_SUBMIT'
+export const requestSubmit = (card) => {
+  return {
+    type: REQUEST_SUBMIT,
+    card
+  }
+}
+
+export const RECEIVE_SUBMIT = 'RECEIVE_SUBMIT'
+export const receiveSubmit = (response) => {
+  return {
+    type: RECEIVE_SUBMIT,
+    response
+  }
+}
+
+export const CLOSE_WINDOW = 'CLOSE_WINDOW'
+export const closeWindow = () => {
+  window.close()
+}
+
+export const submitCard = (card) => {
+  return function (dispatch) {
+    dispatch(requestSubmit(card))
+
+    TrelloApi.submitCard(card)
+      .then((res) => {
+        dispatch(receiveSubmit(res))
+        // dispatch(closeWindow())
       })
   }
 }

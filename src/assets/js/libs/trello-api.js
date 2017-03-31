@@ -1,5 +1,6 @@
 import 'libs/vendor/trello-client'
 import * as storage from 'libs/storage'
+import FieldTypes from 'libs/field-types'
 
 const APP_KEY = process.env.TRELLO_APP_KEY
 
@@ -61,14 +62,19 @@ TrelloApi.deauthorize = () => {
  */
 TrelloApi.submitCard = (data) => {
   return new Promise((resolve, reject) => {
+    // pull out the list ID from the board-list field
+    console.log(data)
+    const [ , idList ] = data[FieldTypes.BOARD_LIST].split('|')
+
     const options = {
-      name: data['card-title'],
-      desc: data['card-description'],
-      date: null,
-      pos: data['position'],
-      idList: data['list'],
-      urlSource: null
+      name: data[FieldTypes.TITLE],
+      desc: data[FieldTypes.DESCRIPTION],
+      date: data[FieldTypes.DUE_DATE],
+      pos: data[FieldTypes.POSITION],
+      idList: idList
     }
+
+    console.log(options)
 
     Trello.rest(
       'POST',

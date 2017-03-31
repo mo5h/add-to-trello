@@ -1,6 +1,0 @@
-export { default as Title } from './Title'
-export { default as Description } from './Description'
-export { default as DueDate } from './DueDate'
-export { default as Board } from './Board'
-export { default as List } from './List'
-export { default as Position } from './Position'

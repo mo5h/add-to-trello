@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import noty from 'noty'
 import TrelloApi from 'libs/trello-api'
 import {
-  save,
+  saveFields,
+  saveTrello,
   moveField,
   toggleField,
   updatePrefill
@@ -33,7 +34,8 @@ class SettingsPage extends Component {
       trello
     } = this.props
 
-    dispatch(save(fields, trello))
+    dispatch(saveFields(fields))
+    dispatch(saveTrello(trello))
 
     // TODO: might be a better way to handle this
     noty({
