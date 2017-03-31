@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { openSettings } from 'libs/chrome'
 import TrelloApi from 'libs/trello-api'
-import { submitCard, saveFields } from 'actions'
+import { submitCard } from 'actions'
 
 import {
   TrelloLogo,
@@ -20,15 +20,8 @@ class PopupPage extends Component {
     openSettings()
   }
 
-  onSubmit (data, persistFields) {
-    const {
-      dispatch,
-      fields
-    } = this.props
-
-    if (persistFields) {
-      dispatch(saveFields(fields))
-    }
+  onSubmit (data) {
+    const { dispatch } = this.props
 
     dispatch(submitCard(data))
   }

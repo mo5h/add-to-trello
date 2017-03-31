@@ -1,15 +1,12 @@
 import update from 'react/lib/update'
 import initialState from 'libs/initial-state'
-import * as storage from 'libs/storage'
 import {
   MOVE_FIELD,
   TOGGLE_FIELD,
   UPDATE_PREFILL
 } from 'actions'
 
-const preloadedState = storage.get(storage.SETTINGS_KEY) || initialState.fields
-
-export default function fields (state = preloadedState, action) {
+export default function fields (state = initialState.fields, action) {
   switch (action.type) {
     case MOVE_FIELD:
       const dragField = state[action.dragIndex]

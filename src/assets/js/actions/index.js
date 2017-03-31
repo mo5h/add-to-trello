@@ -1,4 +1,3 @@
-import * as storage from 'libs/storage'
 import TrelloApi from 'libs/trello-api'
 
 export const MOVE_FIELD = 'MOVE_FIELD'
@@ -16,24 +15,6 @@ export const toggleField = (id, display) => {
     type: TOGGLE_FIELD,
     id,
     display
-  }
-}
-
-export const SAVE_FIELDS = 'SAVE_FIELDS'
-export const saveFields = (fields) => {
-  storage.set(storage.SETTINGS_KEY, fields)
-  return {
-    type: SAVE_FIELDS,
-    fields
-  }
-}
-
-export const SAVE_TRELLO = 'SAVE_TRELLO'
-export const saveTrello = (trello) => {
-  storage.set(storage.ORGS_KEY, trello)
-  return {
-    type: SAVE_TRELLO,
-    trello
   }
 }
 
@@ -146,7 +127,7 @@ export const submitCard = (card) => {
     TrelloApi.submitCard(card)
       .then((res) => {
         dispatch(receiveSubmit(res))
-        // dispatch(closeWindow())
+        dispatch(closeWindow())
       })
   }
 }

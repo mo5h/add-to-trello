@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import noty from 'noty'
 import TrelloApi from 'libs/trello-api'
 import {
-  saveFields,
-  saveTrello,
   moveField,
   toggleField,
   updatePrefill
@@ -21,29 +18,9 @@ import {
 class SettingsPage extends Component {
   constructor (props) {
     super(props)
-    this.onSave = this.onSave.bind(this)
     this.onReorder = this.onReorder.bind(this)
     this.onToggle = this.onToggle.bind(this)
     this.updatePrefill = this.updatePrefill.bind(this)
-  }
-
-  onSave () {
-    const {
-      dispatch,
-      fields,
-      trello
-    } = this.props
-
-    dispatch(saveFields(fields))
-    dispatch(saveTrello(trello))
-
-    // TODO: might be a better way to handle this
-    noty({
-      theme: 'bootstrapTheme',
-      text: 'Saved!',
-      type: 'success',
-      timeout: 3000
-    })
   }
 
   onReorder (dragIndex, hoverIndex) {
@@ -108,17 +85,12 @@ class SettingsPage extends Component {
         fontSize: '20px',
         padding: '10px',
         borderBottom: '1px solid #D6DADC'
-      },
-      saveButton: {
-        float: 'right',
-        marginTop: '20px'
       }
     }
 
     return (
       <div className='clearfix'>
         <div className='col-md-7 col-md-offset-3'>
-          <button onClick={this.onSave} className='btn green-button' style={styles.saveButton}>Save</button>
           <h3 style={styles.heading}>Popup Settings</h3>
           <DraggableContainer
             fields={fields}

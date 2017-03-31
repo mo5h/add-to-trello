@@ -19,10 +19,8 @@ class PopupForm extends Component {
     } = this.props
     const data = {}
 
-    // should we persist the fields data
-    // before we save?
-    let persistFields = false
-
+    // TODO: refactor using callbacks
+    // instead of reading child's state via refs
     fields.map((f) => {
       const prefill = this.refs[f.id]
       if (!prefill) return null
@@ -31,7 +29,6 @@ class PopupForm extends Component {
       // if we have `last_used` selected, update state to include the
       // newly selected board/list and make sure we persist state before submitting
       if (f.prefill.selected.id === PrefillTypes.BOARD_LIST_LAST_USED.id) {
-        persistFields = true
         dispatch(updatePrefill(f.id, {
           ...f.prefill,
           value
@@ -41,7 +38,7 @@ class PopupForm extends Component {
       data[f.id] = value
     })
 
-    onSubmit(data, persistFields)
+    onSubmit(data)
   }
 
   render () {
