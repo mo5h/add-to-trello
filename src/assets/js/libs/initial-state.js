@@ -33,16 +33,6 @@ const initialState = {
       }
     },
     {
-      id: FieldTypes.DUE_DATE,
-      label: 'Due Date',
-      display: true,
-      prefill: {
-        available: [PrefillTypes.CURRENT_DATE, PrefillTypes.USER_DEFINED],
-        selected: PrefillTypes.CURRENT_DATE,
-        value: null
-      }
-    },
-    {
       id: FieldTypes.BOARD_LIST,
       label: 'Board and List',
       display: true,
@@ -55,10 +45,20 @@ const initialState = {
     {
       id: FieldTypes.POSITION,
       label: 'Position',
-      display: true,
+      display: false,
       prefill: {
-        available: [PrefillTypes.POSITION_TOP, PrefillTypes.POSITION_BOTTOM, PrefillTypes.USER_DEFINED],
+        available: [PrefillTypes.POSITION_TOP, PrefillTypes.POSITION_BOTTOM],
         selected: PrefillTypes.POSITION_BOTTOM,
+        value: null
+      }
+    },
+    {
+      id: FieldTypes.DUE_DATE,
+      label: 'Due Date',
+      display: false,
+      prefill: {
+        available: [PrefillTypes.CURRENT_DATE, PrefillTypes.CHOOSE_DATE],
+        selected: PrefillTypes.CURRENT_DATE,
         value: null
       }
     }

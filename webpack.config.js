@@ -37,6 +37,10 @@ module.exports = {
         loader: ExtractTextPlugin.extract('css!sass')
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('css')
+      },
+      {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=application/font-woff'
       },

@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import PrefillTypes from 'libs/prefill-types'
+import Flatpickr from 'react-flatpickr'
+import 'flatpickr/dist/flatpickr.css'
+
 import {
   BoardListChooser
 } from 'components'
@@ -77,6 +80,18 @@ class PrefillSelect extends Component {
       case PrefillTypes.BOARD_LIST_CHOOSE.id:
         return (
           <BoardListChooser prefillValue={options.value} onChange={this.onChange} />
+        )
+      case PrefillTypes.CHOOSE_DATE.id:
+        return (
+          <Flatpickr
+            className='form-control'
+            onChange={this.onChange}
+            options={{
+              enableTime: true,
+              altInput: true,
+              defaultDate: 'today'
+            }}
+          />
         )
       default:
         return null

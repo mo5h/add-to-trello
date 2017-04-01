@@ -1924,6 +1924,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+flatpickr, flatpickr@^2.3.5:
+  version "2.4.8"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-2.4.8.tgz#152136c6657089ebb7c6af8cd969054c55bd3dd4"
+
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
@@ -3675,6 +3679,12 @@ react-dom:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+react-flatpickr:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-flatpickr/-/react-flatpickr-3.2.0.tgz#858d5425e78a8380f3ff9de5b60926868188ffcf"
+  dependencies:
+    flatpickr "^2.3.5"
 
 react-redux:
   version "5.0.2"
