@@ -1,7 +1,6 @@
 const localStorage = window.localStorage
 
-export const ORGS_KEY = 'a2t_orgs'
-export const SETTINGS_KEY = 'a2t_settings'
+export const REDUX_KEY = 'redux'
 export const TRELLO_KEY = 'trello_token'
 
 /**
@@ -45,7 +44,6 @@ export const clear = (key = null) => {
     return
   }
 
-  localStorage.removeItem(ORGS_KEY)
-  localStorage.removeItem(SETTINGS_KEY)
+  localStorage.removeItem(REDUX_KEY)
   localStorage.removeItem(TRELLO_KEY)
 }
