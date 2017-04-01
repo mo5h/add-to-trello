@@ -62,9 +62,11 @@ TrelloApi.deauthorize = () => {
  */
 TrelloApi.submitCard = (data) => {
   return new Promise((resolve, reject) => {
-    // pull out the list ID from the board-list field
-    console.log(data)
-    const [ , idList ] = data[FieldTypes.BOARD_LIST].split('|')
+    let idList = null
+    if (data[FieldTypes.bBOARDLIST]) {
+      // pull out the list ID from the board-list field
+      [ , idList ] = data[FieldTypes.BOARD_LIST].split('|')
+    }
 
     const options = {
       name: data[FieldTypes.TITLE],
@@ -73,8 +75,6 @@ TrelloApi.submitCard = (data) => {
       pos: data[FieldTypes.POSITION],
       idList: idList
     }
-
-    console.log(options)
 
     Trello.rest(
       'POST',
@@ -104,59 +104,3 @@ TrelloApi.fetchAll = () => {
 }
 
 export default TrelloApi
-
-/**
- * Make Trello API call to get organizations, boards, and lists for the user.
- * If data has been cached, use that instead.
- *
- * @param {Function} callback - is called with formatted data, or an error
- * @return {void}
- */
-// export const getOrgsAndBoards = (callback) => {
-//   const orgs = storage.get(storage.ORGS_KEY)
-//   if (orgs) {
-//     return callback(null, orgs)
-//   }
-
-//   const orgList = {
-//     me: { name: 'Boards', boards: [] }
-//   }
-
-//   getOrgs((err, orgs) => {
-//     if (err) {
-//       return callback(err)
-//     }
-
-//     $.each(orgs, (key, org) => {
-//       orgList[org.id] = {
-//         name: org.displayName,
-//         boards: []
-//       }
-//     })
-
-//     getBoards((err, boards) => {
-//       if (err) {
-//         return callback(err)
-//       }
-
-//       $.each(boards, (key, board) => {
-//         // add board to either it's organization or the 'me' catchall
-//         const organization = orgList[board.idOrganization || 'me']
-
-//         // make sure the organization we're trying to add
-//         // the board to exists
-//         if (organization !== undefined) {
-//           organization.boards.push(board)
-//         } else {
-//           // if the organization the board belongs to
-//           // wasn't added above for whatever reason,
-//           // add the board to the 'me' catchall
-//           orgList['me'].boards.push(board)
-//         }
-//       })
-
-//       storage.set(storage.ORGS_KEY, orgList)
-//       callback(null, orgList)
-//     })
-//   })
-// }
