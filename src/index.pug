@@ -1,0 +1,11 @@
+- var files = htmlWebpackPlugin.files
+- var page = htmlWebpackPlugin.options.title
+doctype html
+html
+  head
+    title Add to Trello
+    - for (var css in files.css)
+      link(href=files.css[css] rel='stylesheet')
+  body
+    div#root
+    script(src=files.chunks[page].entry)

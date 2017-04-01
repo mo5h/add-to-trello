@@ -1,154 +1,23 @@
-require('./common');
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
-var noty = require('noty');
-var storage = require('./lib/storage');
-var TrelloApi = require('./lib/trello-api');
-var dropdownBuilder = require('./lib/dropdown-builder');
+import 'styles/index.scss'
+import configureStore from './store'
+import TrelloApi from 'libs/trello-api'
 
-var serialize = function serialize(form) {
-  var formData = form.serializeArray();
-  var formObj  = {};
+import SettingsPage from './pages/SettingsPage'
 
-  $.each(formData, function (index, value) {
-    if (value.value !== '') formObj[value.name] = value.value;
-  });
-
-  return formObj;
+if (!TrelloApi.isAuthorized()) {
+  TrelloApi.authorize()
+    .catch((err) => console.log(err))
 }
 
-var Settings = {
-  init: function() {
-    // authorize with trello
-    TrelloApi.authorize(
-      this.onAuthSuccess.bind(this),
-      this.onAuthError.bind(this)
-    );
+const store = configureStore()
 
-    if ($('.js-board-list').val() == 'choose') {
-        this.showBoardsAndLists();
-    }
-
-    $('.js-settings-form').submit(this.submitForm);
-    $('.js-boards').change(dropdownBuilder.changeList);
-    $('.js-board-list').change(this.changeBoardsAndLists);
-    $('.js-defined-control').change(this.toggleAsDefinedInput);
-  },
-
-  onAuthSuccess: function() {
-    $('#auth').addClass('hidden');
-    $('#settings-form').removeClass('hidden');
-    $('#success')
-      .noty({
-        text: 'You have successfully authorized Add to Trello',
-        layout: 'bottomRight',
-        type: 'information',
-        timeout: 5000
-      });
-
-    this.initSettings();
-  },
-
-  onAuthError: function() {
-    $('#auth').addClass('hidden');
-    $('#error').removeClass('hidden');
-    $('#settings-form').addClass('hidden');
-  },
-
-  submitForm: function(e) {
-      e.preventDefault();
-
-      var form = serialize($(e.target));
-      var data = {
-        title: form.title,
-        description: form.description,
-        boardList: form.boardList,
-        position: form.position,
-        titleValue: '',
-        descriptionValue: ''
-      };
-
-      // add defined title value if necessary
-      if (form.title == 'defined') {
-        data.titleValue = form.titleValue;
-      }
-
-      // add defined description value if necessary
-      if (form.description == 'defined') {
-        data.descriptionValue = form.descriptionValue;
-      }
-
-      // save main settings data
-      storage.setSettings(data);
-
-      // save board/list overrides
-      if (form.boardList == 'choose') {
-        storage.setDefaults(form.board, form.list);
-      }
-
-      // notify the user
-      noty({
-        text: 'Save successful!',
-        layout: 'topLeft',
-        theme: 'bootstrapTheme',
-        type: 'success',
-        timeout: 2000
-      });
-  },
-
-  initSettings: function() {
-    var settings = storage.getSettings();
-    var form = $('.js-settings-form');
-
-    $.each(settings, function(key, value) {
-      var option = form.find('[name="'+ key +'"]');
-
-      // set the option's value
-      option.val(value);
-
-      // unhide the as-defined inputs
-      if (value == 'defined') {
-        option.siblings('input').removeClass('hidden');
-      }
-    });
-  },
-
-  showBoardsAndLists: function() {
-    $('.board-dropdown').removeClass('hidden');
-    $('.list-dropdown').removeClass('hidden');
-
-    // load from storage immediately if we have it
-    dropdownBuilder.loadBoardsAndLists();
-
-    // call the API to update our local storage
-    TrelloApi.getOrgsAndBoards(dropdownBuilder.loadBoardsAndLists);
-  },
-
-  hideBoardsAndLists: function() {
-    $('.board-dropdown').addClass('hidden');
-    $('.list-dropdown').addClass('hidden');
-  },
-
-  changeBoardsAndLists: function(e) {
-    var selected = $(e.target).val();
-    var self = Settings;
-
-    if (selected == 'choose') {
-      self.showBoardsAndLists();
-    } else {
-      self.hideBoardsAndLists();
-    }
-  },
-
-  toggleAsDefinedInput: function(e) {
-    var input  = $(e.target).siblings('input');
-    var option = $(e.target).val();
-
-    if (option == 'defined') {
-      input.removeClass('hidden');
-    } else {
-      input.addClass('hidden');
-    }
-  }
-};
-
-Settings.init();
+render(
+  <Provider store={store}>
+    <SettingsPage />
+  </Provider>,
+  document.getElementById('root')
+)

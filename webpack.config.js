@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const DotenvPlugin = require('webpack-dotenv-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const DotenvPlugin = require('webpack-dotenv-plugin')
 
 module.exports = {
   debug: true,
@@ -25,7 +25,7 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015'],
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
@@ -35,6 +35,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('css')
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -58,7 +62,12 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     alias: {
-      bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets')
+      styles: path.resolve(__dirname, 'src', 'assets', 'css'),
+      libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
+      components: path.resolve(__dirname, 'src', 'assets', 'js', 'components'),
+      actions: path.resolve(__dirname, 'src', 'assets', 'js', 'actions'),
+      bootstrap: path.resolve(__dirname, 'node_modules', 'bootstrap-sass', 'assets'),
+      toggle: path.resolve(__dirname, 'node_modules', '@trendmicro', 'react-toggle-switch', 'dist', 'react-toggle-switch.css')
     }
   },
 
@@ -71,6 +80,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+
+    new webpack.DefinePlugin({
+      DEVELOPMENT: process.env.NODE_ENV === 'development'
     }),
 
     // extract css into separate file
@@ -88,14 +101,14 @@ module.exports = {
       inject: false,
       title: 'popup',
       filename: 'popup.html',
-      template: 'src/popup.pug',
+      template: 'src/index.pug'
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       title: 'settings',
       filename: 'settings.html',
-      template: 'src/settings.pug',
+      template: 'src/index.pug'
     })
   ]
-};
+}

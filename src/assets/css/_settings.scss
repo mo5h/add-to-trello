@@ -1,13 +1,63 @@
-#success {
-  height: 47px;
-}
 
-.pure-control-group {
-  margin-bottom: 15px;
-}
-
-#settings {
+.Settings {
   color: #4d4d4d;
+
+  .logo-container {
+    padding: 48px 0;
+    margin-bottom: 5px;
+    background-color: #edeff0;
+    border-bottom: 1px solid #d6dadc;
+
+    .pre-logo {
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 200;
+      margin: -13px;
+    }
+
+    .centered {
+      float: none;
+      margin: 0 auto;
+      width: 50%;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+
+  .trello-logo {
+    vertical-align: middle;
+    width: 350px;
+    display: inline;
+  }
+
+  .auth-loading {
+    color: black;
+    img {
+      margin: 10px 0;
+      width: 3%;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid #d6dadc;
+    margin-top: 30px;
+  }
+
+
+
+
+
+
+
+
+
+  #success {
+    height: 47px;
+  }
+
+  .pure-control-group {
+    margin-bottom: 15px;
+  }
 
   .paypal {
     margin-top: 15px;
@@ -21,11 +71,6 @@
     max-width: 850px;
   }
 
-  .links {
-    border-top: 1px solid #d6dadc;
-    margin-top: 30px;
-  }
-
   .sub_header {
     font-size: 21px;
     border-bottom: 1px solid #d6dadc;
@@ -36,42 +81,6 @@
 
   .sub_description {
     margin: 8px 0 30px 0;
-  }
-
-  .logo-container {
-    padding: 48px 0;
-    margin-bottom: 5px;
-    background-color: #edeff0;
-    border-bottom: 1px solid #d6dadc;
-  }
-
-  .logo-container .centered {
-    float: none;
-    margin: 0 auto;
-    width: 50%;
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .pre-logo {
-    font-size: 40px;
-    line-height: 1;
-    font-weight: 200;
-    margin: -13px;
-  }
-
-  .logo {
-    vertical-align: middle;
-    width: 350px;
-    display: inline;
-  }
-
-  .auth-loading {
-    color: black;
-  }
-
-  .auth-loading img {
-    margin-bottom: 15px;
   }
 
   .success-body {
