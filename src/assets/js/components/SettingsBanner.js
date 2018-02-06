@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  TrelloLogo
-} from 'components'
+import { TrelloLogo } from 'components'
 
 const SettingsBanner = () => {
   return (

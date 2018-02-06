@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
-import {openTrello} from 'libs/chrome'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { openTrello } from 'libs/chrome'
 
 /**
  * Trello Logo Component

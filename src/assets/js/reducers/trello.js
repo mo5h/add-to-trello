@@ -1,4 +1,4 @@
-import update from 'react/lib/update'
+import update from 'immutability-helper'
 import initialState from 'libs/initial-state'
 
 import {
