@@ -13,7 +13,7 @@ export default {
   },
   USER_DEFINED: {
     id: 'user-defined',
-    label: 'As Defined'
+    label: 'Custom'
   },
   BOARD_LIST_CHOOSE: {
     id: 'board-list-choose',
@@ -37,6 +37,6 @@ export default {
   },
   CHOOSE_DATE: {
     id: 'choose-date',
-    label: 'Choose a Date'
+    label: 'Choose'
   }
 }

@@ -24,25 +24,19 @@ class SettingsPage extends Component {
   }
 
   onReorder (dragIndex, hoverIndex) {
-    const {
-      dispatch
-    } = this.props
+    const { dispatch } = this.props
 
     dispatch(moveField(dragIndex, hoverIndex))
   }
 
   onToggle (id, display) {
-    const {
-      dispatch
-    } = this.props
+    const { dispatch } = this.props
 
     dispatch(toggleField(id, display))
   }
 
   updatePrefill (fieldId, prefill) {
-    const {
-      dispatch
-    } = this.props
+    const { dispatch } = this.props
 
     dispatch(updatePrefill(fieldId, prefill))
   }
