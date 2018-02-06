@@ -6,61 +6,58 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const DotenvPlugin = require('webpack-dotenv-plugin')
 
 module.exports = {
-  debug: true,
-  devtool: 'cheap-module-source-map',
   entry: {
     popup: './src/assets/js/popup.js',
     settings: './src/assets/js/settings.js'
   },
 
   output: {
-    path: './build',
+    path: path.resolve(__dirname, 'build'),
     filename: 'assets/js/[name].js'
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['env', 'react', 'stage-0']
         }
       },
       {
         test: /\.pug$/,
-        loader: 'pug'
+        loader: 'pug-loader'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        loader: ExtractTextPlugin.extract('css-loader!sass-loader')
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css')
+        loader: ExtractTextPlugin.extract('css-loader')
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file'
+        loader: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
 
   resolve: {
-    extensions: ['', '.js'],
     alias: {
       styles: path.resolve(__dirname, 'src', 'assets', 'css'),
       libs: path.resolve(__dirname, 'src', 'assets', 'js', 'libs'),
@@ -72,6 +69,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      debug: process.env.NODE_ENV === 'development'
+    }),
+
     new DotenvPlugin({
       sample: './.env.example',
       path: './.env'
