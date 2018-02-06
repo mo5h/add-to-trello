@@ -63,7 +63,7 @@ TrelloApi.deauthorize = () => {
 TrelloApi.submitCard = (data) => {
   return new Promise((resolve, reject) => {
     let idList = null
-    if (data[FieldTypes.bBOARDLIST]) {
+    if (data[FieldTypes.BOARD_LIST]) {
       // pull out the list ID from the board-list field
       [ , idList ] = data[FieldTypes.BOARD_LIST].split('|')
     }
